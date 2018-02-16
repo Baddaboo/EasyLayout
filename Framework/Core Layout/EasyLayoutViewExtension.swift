@@ -95,24 +95,27 @@ extension View {
         for view in views { view.translatesAutoresizingMaskIntoConstraints = false }
     }
     
+    @available(swift, deprecated: 0.1, message: "For use in Objective C code only")
     @objc public func activate(_ constraints: [NSLayoutConstraint]) {
         activate(constraints, for: nil)
     }
     
+    @available(swift, deprecated: 0.1, message: "For use in Objective C code only")
     @objc public func activate(_ constraints: [NSLayoutConstraint], for views: [View]?) {
         activate(constraints, for: views, priority: .eventually)
     }
     
+    @available(swift, deprecated: 0.1, message: "For use in Objective C code only")
     @objc public func activate(_ constraints: [NSLayoutConstraint], for views: [View]?, priority: EasyLayoutUpdatePriority) {
         disableTranslatesAutoresizingMask(views ?? subviews)
         NSLayoutConstraint.activate(constraints)
         
         #if os(iOS)
-        switch priority {
-        case .now: layoutIfNeeded()
-        case .eventually: setNeedsLayout()
-        case .whenever: break
-        }
+            switch priority {
+            case .now: layoutIfNeeded()
+            case .eventually: setNeedsLayout()
+            case .whenever: break
+            }
         #endif
     }
     
@@ -138,6 +141,19 @@ extension View {
     
     public static func / (left: View, right: CGFloat) -> EasyLayoutToken {
         return left * (1 / right)
+    }
+    
+    public func activate(_ constraints: NSLayoutConstraint..., for views: [View]? = nil, priority: EasyLayoutUpdatePriority = .eventually) {
+        disableTranslatesAutoresizingMask(views ?? subviews)
+        NSLayoutConstraint.activate(constraints)
+        
+        #if os(iOS)
+            switch priority {
+            case .now: layoutIfNeeded()
+            case .eventually: setNeedsLayout()
+            case .whenever: break
+            }
+        #endif
     }
     
     public func replace(_ constraint: inout NSLayoutConstraint?, with newConstraint: NSLayoutConstraint, priority: EasyLayoutUpdatePriority = .now) {
