@@ -28,15 +28,11 @@
     
     [self addSubviews: _views];
     
-    [self applyConstraints];
-}
-
-- (void)applyConstraints {
     NSArray<NSLayoutConstraint *> *constraints = [NSArray arrayWithObjects:
-                                                   [_testView.width equalToView: self.view multiplier: 0.8],
-                                                   [_testView.height equalToView: self.view multiplier: 0.8],
-                                                   [_testView.centerX equalToView: self.view],
-                                                   [_testView.centerY equalToView: self.view], nil];
+                                                  [_testView.width equalToView: self.view multiplier: 0.8],
+                                                  [_testView.height equalToView: self.view multiplier: 0.8],
+                                                  [_testView.centerX equalToView: self.view],
+                                                  [_testView.centerY equalToView: self.view], nil];
     [self activate: constraints];
 }
 

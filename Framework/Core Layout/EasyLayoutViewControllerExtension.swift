@@ -23,14 +23,17 @@ extension ViewController {
         view.replace(constraint, with: newConstraint, priority: priority)
     }
     
+    @available(swift, deprecated: 0.1, message: "For use in Objective C code only")
     @objc public func activate(_ constraints: [NSLayoutConstraint]) {
         activate(constraints, for: nil)
     }
     
+    @available(swift, deprecated: 0.1, message: "For use in Objective C code only")
     @objc public func activate(_ constraints: [NSLayoutConstraint], for views: [View]?) {
         activate(constraints, for: views, priority: .eventually)
     }
     
+    @available(swift, deprecated: 0.1, message: "For use in Objective C code only")
     @objc public func activate(_ constraints: [NSLayoutConstraint], for views: [View]?, priority: EasyLayoutUpdatePriority) {
         view.activate(constraints, for: views, priority: priority)
     }
@@ -41,6 +44,10 @@ extension ViewController {
     
     @objc public func addSubviews(_ views: Any) {
         view.addSubviews(views)
+    }
+    
+    public func activate(_ constraints: NSLayoutConstraint..., for views: [View]? = nil, priority: EasyLayoutUpdatePriority = .eventually) {
+        view.activate(constraints, for: views, priority: priority)
     }
     
     public func replace(_ constraint: inout NSLayoutConstraint?, with newConstraint: NSLayoutConstraint, priority: EasyLayoutUpdatePriority = .now) {

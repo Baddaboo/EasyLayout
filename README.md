@@ -33,9 +33,7 @@ This operation produces a NSLayoutConstraint object that can then be activated u
 Or can be activated using a single helper function:
 
 ```Swift
-    activate([
-        view1.right == view2.left + 10
-    ])
+    activate(view1.right == view2.left + 10)
 ```
 
 At runtime, constraints can be replaced just as easily. For example, this is useful for animating the transition of a dynamic layout:
